@@ -122,7 +122,8 @@ export default function StorePage({ onAddToCart }: StorePageProps) {
                 />
                 <button 
                   onClick={() => onAddToCart(product)}
-                  className="absolute bottom-4 right-4 bg-white p-3 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition-all transform translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
+                  className="absolute bottom-4 right-4 bg-white p-3 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition-all lg:transform lg:translate-y-12 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100"
+                  aria-label="Add to cart"
                 >
                   <ShoppingBag size={20} />
                 </button>
@@ -131,7 +132,14 @@ export default function StorePage({ onAddToCart }: StorePageProps) {
                 <p className="text-xs font-bold text-rose-500 uppercase tracking-widest mb-1">{product.category}</p>
                 <h3 className="text-lg font-bold text-gray-900 mb-1">{product.name}</h3>
                 <p className="text-sm text-gray-500 mb-2">{product.ageRange}</p>
-                <p className="text-lg font-bold text-gray-900">GHS {product.price}</p>
+                <p className="text-lg font-bold text-gray-900 mb-4">GHS {product.price}</p>
+                <button 
+                  onClick={() => onAddToCart(product)}
+                  className="w-full lg:hidden bg-rose-500 text-white py-3 rounded-xl text-sm font-bold flex items-center justify-center space-x-2 active:bg-rose-600 transition-colors"
+                >
+                  <ShoppingBag size={18} />
+                  <span>Add to Cart</span>
+                </button>
               </div>
             </motion.div>
           ))}

@@ -152,7 +152,8 @@ const Navbar = ({ cartCount, onOpenCart }: { cartCount: number; onOpenCart: () =
           <div className="flex items-center space-x-4">
             <button 
               onClick={onOpenCart}
-              className="text-gray-700 hover:text-rose-500 transition-colors relative"
+              className="text-gray-700 hover:text-rose-500 transition-colors relative p-2"
+              aria-label="Open cart"
             >
               <ShoppingBag size={24} />
               {cartCount > 0 && (

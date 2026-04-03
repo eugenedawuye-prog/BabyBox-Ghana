@@ -270,21 +270,21 @@ const Pricing = () => {
       name: "Monthly",
       price: "GHS 450",
       period: "per box",
-      features: ["3-5 Curated Items", "Free Delivery in Accra", "Cancel Anytime", "Personalized Style"],
+      features: ["5-10 Curated Items", "Free Delivery in Accra", "Cancel Anytime", "Personalized Style"],
       popular: false
     },
     {
       name: "3 Month Bundle",
       price: "GHS 1,200",
       period: "save GHS 150",
-      features: ["3-5 Curated Items", "Free Delivery Nationwide", "Priority Support", "Personalized Style", "Bonus Gift in 1st Box"],
+      features: ["10-15 Curated Items", "Free Delivery Nationwide", "Priority Support", "Personalized Style", "Bonus Gift in 1st Box"],
       popular: true
     },
     {
       name: "6 Month Bundle",
       price: "GHS 2,200",
       period: "save GHS 500",
-      features: ["3-5 Curated Items", "Free Delivery Nationwide", "VIP Support", "Personalized Style", "Bonus Gift in Every Box"],
+      features: ["15-20 Curated Items", "Free Delivery Nationwide", "VIP Support", "Personalized Style", "Bonus Gift in Every Box"],
       popular: false
     }
   ];
