@@ -10,6 +10,7 @@ interface CheckoutPageProps {
 
 export default function CheckoutPage({ cart, onClearCart }: CheckoutPageProps) {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+  const [paymentType, setPaymentType] = useState<'card' | 'momo'>('card');
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
@@ -20,14 +21,16 @@ export default function CheckoutPage({ cart, onClearCart }: CheckoutPageProps) {
     phone: '',
     cardNumber: '',
     expiry: '',
-    cvv: ''
+    cvv: '',
+    momoNumber: '',
+    momoProvider: 'mtn'
   });
 
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const delivery = subtotal > 500 ? 0 : 50;
   const total = subtotal + delivery;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -198,44 +201,103 @@ export default function CheckoutPage({ cart, onClearCart }: CheckoutPageProps) {
                 <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
                   <CreditCard className="mr-2 text-rose-500" size={24} /> Payment Method
                 </h2>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
-                    <input 
-                      required
-                      type="text" 
-                      name="cardNumber"
-                      value={formData.cardNumber}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 outline-none transition-all"
-                      placeholder="0000 0000 0000 0000"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
-                    <input 
-                      required
-                      type="text" 
-                      name="expiry"
-                      value={formData.expiry}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 outline-none transition-all"
-                      placeholder="MM/YY"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
-                    <input 
-                      required
-                      type="text" 
-                      name="cvv"
-                      value={formData.cvv}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 outline-none transition-all"
-                      placeholder="000"
-                    />
-                  </div>
+                
+                <div className="flex space-x-4 mb-8">
+                  <button
+                    type="button"
+                    onClick={() => setPaymentType('card')}
+                    className={`flex-1 py-3 rounded-xl border-2 transition-all font-bold ${
+                      paymentType === 'card' 
+                        ? 'border-rose-500 bg-rose-50 text-rose-500' 
+                        : 'border-gray-100 text-gray-500 hover:border-gray-200'
+                    }`}
+                  >
+                    Credit Card
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPaymentType('momo')}
+                    className={`flex-1 py-3 rounded-xl border-2 transition-all font-bold ${
+                      paymentType === 'momo' 
+                        ? 'border-rose-500 bg-rose-50 text-rose-500' 
+                        : 'border-gray-100 text-gray-500 hover:border-gray-200'
+                    }`}
+                  >
+                    Mobile Money
+                  </button>
                 </div>
+
+                {paymentType === 'card' ? (
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+                      <input 
+                        required
+                        type="text" 
+                        name="cardNumber"
+                        value={formData.cardNumber}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 outline-none transition-all"
+                        placeholder="0000 0000 0000 0000"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+                      <input 
+                        required
+                        type="text" 
+                        name="expiry"
+                        value={formData.expiry}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 outline-none transition-all"
+                        placeholder="MM/YY"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                      <input 
+                        required
+                        type="text" 
+                        name="cvv"
+                        value={formData.cvv}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 outline-none transition-all"
+                        placeholder="000"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Network Provider</label>
+                      <select 
+                        name="momoProvider"
+                        value={formData.momoProvider}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 outline-none transition-all bg-white"
+                      >
+                        <option value="mtn">MTN Momo</option>
+                        <option value="telecel">Telecel Cash</option>
+                        <option value="at">AT Money</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
+                      <input 
+                        required
+                        type="tel" 
+                        name="momoNumber"
+                        value={formData.momoNumber}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 focus:border-rose-500 outline-none transition-all"
+                        placeholder="024 000 0000"
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      You will receive a prompt on your phone to authorize the payment.
+                    </p>
+                  </div>
+                )}
               </div>
 
               <button 
