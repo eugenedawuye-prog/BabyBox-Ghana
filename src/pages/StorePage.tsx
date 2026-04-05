@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ShoppingBag, Filter, X } from 'lucide-react';
-import { PRODUCTS } from '../data/products';
+import { ShoppingBag, Filter, X, Loader2 } from 'lucide-react';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { db, handleFirestoreError, OperationType } from '../firebase';
 import { Product } from '../types';
 
 interface StorePageProps {
@@ -12,24 +13,54 @@ interface StorePageProps {
 export default function StorePage({ onAddToCart }: StorePageProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const activeCategory = searchParams.get('category');
   const activeAge = searchParams.get('age');
 
+  useEffect(() => {
+    const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const productsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Product[];
+      setProducts(productsData);
+      setIsLoading(false);
+    }, (err) => {
+      handleFirestoreError(err, OperationType.LIST, 'products');
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter(product => {
+    return products.filter(product => {
       const categoryMatch = !activeCategory || product.category === activeCategory;
       const ageMatch = !activeAge || product.ageRange === activeAge;
       return categoryMatch && ageMatch;
     });
-  }, [activeCategory, activeAge]);
+  }, [products, activeCategory, activeAge]);
 
-  const categories = Array.from(new Set(PRODUCTS.map(p => p.category)));
-  const ages = Array.from(new Set(PRODUCTS.map(p => p.ageRange)));
+  const categories = useMemo(() => Array.from(new Set(products.map(p => p.category))), [products]);
+  const ages = useMemo(() => Array.from(new Set(products.map(p => p.ageRange))), [products]);
 
   const clearFilters = () => {
     setSearchParams({});
   };
+
+  if (isLoading) {
+    return (
+      <div className="pt-32 pb-20 bg-white min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 text-rose-500 animate-spin mx-auto mb-4" />
+          <p className="text-gray-500 font-medium">Loading essentials...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-32 pb-20 bg-white min-h-screen">

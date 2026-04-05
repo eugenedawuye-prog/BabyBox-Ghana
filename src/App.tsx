@@ -33,6 +33,10 @@ import LandingPage from './pages/LandingPage';
 import StorePage from './pages/StorePage';
 import CheckoutPage from './pages/CheckoutPage';
 import CustomerServicePage from './pages/CustomerServicePage';
+import AdminPage from './pages/AdminPage';
+
+// Components
+import ErrorBoundary from './components/ErrorBoundary';
 
 // Types
 import { Product, CartItem } from './types';
@@ -292,6 +296,7 @@ const Footer = () => (
             <li><Link to="/customer-service" className="hover:text-rose-500 transition-colors">FAQs</Link></li>
             <li><Link to="/customer-service" className="hover:text-rose-500 transition-colors">Shipping Policy</Link></li>
             <li><Link to="/customer-service" className="hover:text-rose-500 transition-colors">Contact Us</Link></li>
+            <li><Link to="/admin" className="hover:text-rose-500 transition-colors opacity-50">Admin Panel</Link></li>
           </ul>
         </div>
         <div>
@@ -471,27 +476,30 @@ export default function App() {
   };
 
   return (
-    <Router>
-      <div className="min-h-screen bg-white font-sans selection:bg-rose-100 selection:text-rose-900">
-        <Navbar cartCount={cart.reduce((acc, i) => acc + i.quantity, 0)} onOpenCart={() => setIsCartOpen(true)} />
-        
-        <CartDrawer 
-          isOpen={isCartOpen} 
-          onClose={() => setIsCartOpen(false)} 
-          cart={cart}
-          onUpdateQuantity={updateQuantity}
-          onRemoveItem={removeItem}
-        />
+    <ErrorBoundary>
+      <Router>
+        <div className="min-h-screen bg-white font-sans selection:bg-rose-100 selection:text-rose-900">
+          <Navbar cartCount={cart.reduce((acc, i) => acc + i.quantity, 0)} onOpenCart={() => setIsCartOpen(true)} />
+          
+          <CartDrawer 
+            isOpen={isCartOpen} 
+            onClose={() => setIsCartOpen(false)} 
+            cart={cart}
+            onUpdateQuantity={updateQuantity}
+            onRemoveItem={removeItem}
+          />
 
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/store" element={<StorePage onAddToCart={addToCart} />} />
-          <Route path="/checkout" element={<CheckoutPage cart={cart} onClearCart={clearCart} />} />
-          <Route path="/customer-service" element={<CustomerServicePage />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/store" element={<StorePage onAddToCart={addToCart} />} />
+            <Route path="/checkout" element={<CheckoutPage cart={cart} onClearCart={clearCart} />} />
+            <Route path="/customer-service" element={<CustomerServicePage />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Routes>
 
-        <Footer />
-      </div>
-    </Router>
+          <Footer />
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 }
