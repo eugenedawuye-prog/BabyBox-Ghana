@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingBag, Filter, X } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 import { Product } from '../types';
@@ -160,5 +160,3 @@ export default function StorePage({ onAddToCart }: StorePageProps) {
     </div>
   );
 }
-
-import { AnimatePresence } from 'motion/react';
