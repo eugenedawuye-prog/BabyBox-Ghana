@@ -5,9 +5,65 @@ import {
   Package, 
   Heart, 
   Truck, 
-  Star 
+  Star,
+  ShoppingBag,
+  ChevronRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Product } from '../types';
+import { PRODUCTS } from '../data/products';
+import { resolveImageUrl } from '../utils';
+
+interface LandingPageProps {
+  onAddToCart: (product: Product) => void;
+}
+
+const FeaturedProducts = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) => {
+  const featured = PRODUCTS.slice(0, 4);
+
+  return (
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <h2 className="text-rose-500 font-bold uppercase tracking-widest text-sm mb-4">Our Favorites</h2>
+            <h3 className="text-4xl font-bold text-gray-900">Featured Essentials</h3>
+          </div>
+          <Link to="/store" className="text-rose-500 font-bold flex items-center hover:underline">
+            View All <ChevronRight size={20} />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {featured.map((product) => (
+            <motion.div
+              key={product.id}
+              whileHover={{ y: -10 }}
+              className="group"
+            >
+              <div className="relative aspect-square rounded-3xl overflow-hidden bg-gray-100 mb-4">
+                <img 
+                  src={resolveImageUrl(product.image)} 
+                  alt={product.name} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
+                <button 
+                  onClick={() => onAddToCart(product)}
+                  className="absolute bottom-4 right-4 bg-white p-3 rounded-full shadow-lg hover:bg-rose-500 hover:text-white transition-all opacity-0 group-hover:opacity-100"
+                >
+                  <ShoppingBag size={20} />
+                </button>
+              </div>
+              <p className="text-xs font-bold text-rose-500 uppercase tracking-widest mb-1">{product.category}</p>
+              <h4 className="text-lg font-bold text-gray-900 mb-1">{product.name}</h4>
+              <p className="text-lg font-bold text-gray-900">GHS {product.price}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const AGES = [
   { label: '0-6 Months', href: '/store?age=0-6 Months' },
@@ -385,11 +441,12 @@ const Reviews = () => {
   );
 };
 
-export default function LandingPage() {
+export default function LandingPage({ onAddToCart }: LandingPageProps) {
   return (
     <>
       <Hero />
       <ShopBy />
+      <FeaturedProducts onAddToCart={onAddToCart} />
       <FeaturedIn />
       <HowItWorks />
       <ValueProps />

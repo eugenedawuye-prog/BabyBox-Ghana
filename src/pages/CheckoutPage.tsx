@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { ShoppingBag, CheckCircle2, ArrowRight, CreditCard, Truck, ShieldCheck } from 'lucide-react';
 import { CartItem } from '../types';
+import { resolveImageUrl } from '../utils';
 
 interface CheckoutPageProps {
   cart: CartItem[];
@@ -317,7 +318,7 @@ export default function CheckoutPage({ cart, onClearCart }: CheckoutPageProps) {
                 {cart.map((item) => (
                   <div key={item.id} className="flex items-center space-x-4">
                     <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                      <img src={resolveImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     </div>
                     <div className="flex-grow">
                       <h4 className="text-sm font-bold text-gray-900">{item.name}</h4>

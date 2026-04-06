@@ -1,7 +1,10 @@
 export const resolveImageUrl = (url: string) => {
   if (!url) return '';
   if (url.startsWith('http') || url.startsWith('data:')) return url;
-  if (url.startsWith('/')) return url;
-  // If it's a relative path, assume it's from the root of the public directory
-  return `/${url}`;
+  
+  // Ensure the path starts with a slash
+  const path = url.startsWith('/') ? url : `/${url}`;
+  
+  // Encode the URI to handle spaces and special characters
+  return encodeURI(path);
 };

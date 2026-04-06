@@ -33,13 +33,13 @@ import LandingPage from './pages/LandingPage';
 import StorePage from './pages/StorePage';
 import CheckoutPage from './pages/CheckoutPage';
 import CustomerServicePage from './pages/CustomerServicePage';
-import AdminPage from './pages/AdminPage';
 
 // Components
 import ErrorBoundary from './components/ErrorBoundary';
 
 // Types
 import { Product, CartItem } from './types';
+import { resolveImageUrl } from './utils';
 
 // --- Shared Components ---
 
@@ -296,7 +296,6 @@ const Footer = () => (
             <li><Link to="/customer-service" className="hover:text-rose-500 transition-colors">FAQs</Link></li>
             <li><Link to="/customer-service" className="hover:text-rose-500 transition-colors">Shipping Policy</Link></li>
             <li><Link to="/customer-service" className="hover:text-rose-500 transition-colors">Contact Us</Link></li>
-            <li><Link to="/admin" className="hover:text-rose-500 transition-colors opacity-50">Admin Panel</Link></li>
           </ul>
         </div>
         <div>
@@ -378,7 +377,7 @@ const CartDrawer = ({
                 cart.map((item) => (
                   <div key={item.id} className="flex space-x-4">
                     <div className="w-20 h-20 rounded-2xl overflow-hidden bg-gray-100 flex-shrink-0">
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                      <img src={resolveImageUrl(item.image)} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                     </div>
                     <div className="flex-grow">
                       <div className="flex justify-between items-start mb-1">
@@ -490,11 +489,10 @@ export default function App() {
           />
 
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<LandingPage onAddToCart={addToCart} />} />
             <Route path="/store" element={<StorePage onAddToCart={addToCart} />} />
             <Route path="/checkout" element={<CheckoutPage cart={cart} onClearCart={clearCart} />} />
             <Route path="/customer-service" element={<CustomerServicePage />} />
-            <Route path="/admin" element={<AdminPage />} />
           </Routes>
 
           <Footer />
