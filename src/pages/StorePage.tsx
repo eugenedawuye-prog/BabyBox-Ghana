@@ -5,6 +5,7 @@ import { ShoppingBag, Filter, X, Loader2 } from 'lucide-react';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../firebase';
 import { Product } from '../types';
+import { resolveImageUrl } from '../utils';
 
 interface StorePageProps {
   onAddToCart: (product: Product) => void;
@@ -146,7 +147,7 @@ export default function StorePage({ onAddToCart }: StorePageProps) {
             >
               <div className="relative aspect-square rounded-3xl overflow-hidden bg-gray-100 mb-4">
                 <img 
-                  src={product.image} 
+                  src={resolveImageUrl(product.image)} 
                   alt={product.name} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   referrerPolicy="no-referrer"

@@ -32,6 +32,7 @@ import {
 } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../firebase';
 import { Product } from '../types';
+import { resolveImageUrl } from '../utils';
 
 const CATEGORIES = [
   'Hygiene & Diapering',
@@ -318,7 +319,7 @@ export default function AdminPage() {
                     <td className="px-6 py-4">
                       <div className="flex items-center space-x-4">
                         <div className="w-12 h-12 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
-                          <img src={product.image} alt={product.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                          <img src={resolveImageUrl(product.image)} alt={product.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                         </div>
                         <div>
                           <p className="font-bold text-gray-900">{product.name}</p>
@@ -457,7 +458,7 @@ export default function AdminPage() {
                               ) : formData.image ? (
                                 <div className="relative w-full h-full p-2">
                                   <img 
-                                    src={formData.image} 
+                                    src={resolveImageUrl(formData.image)} 
                                     alt="Preview" 
                                     className="w-full h-full object-contain rounded-lg"
                                   />
@@ -476,15 +477,18 @@ export default function AdminPage() {
                           </div>
                         </div>
                         <div className="md:w-1/2">
-                          <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Or Image URL</label>
+                          <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Or Image Path/URL</label>
                           <input 
                             type="text" 
                             name="image"
                             value={formData.image}
                             onChange={handleInputChange}
                             className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 outline-none transition-all text-sm"
-                            placeholder="https://example.com/image.jpg"
+                            placeholder="e.g. Health and Comfort/Baby FirstAid.jpeg"
                           />
+                          <p className="text-[10px] text-gray-400 mt-1">
+                            Tip: For images in your public folder, just type the path (e.g. "Health and Comfort/image.jpg")
+                          </p>
                         </div>
                       </div>
                     </div>
