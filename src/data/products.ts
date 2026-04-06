@@ -81,7 +81,7 @@ export const PRODUCTS: Product[] = [
     price: 65,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: 'https://picsum.photos/seed/baby-dove-night-time-wash/300/300',
+    image: 'https://i.postimg.cc/W4Xv4CF7/Baby_Dove_Night_Time_Wash.jpg',
     description: 'Calming night time wash for a peaceful sleep.'
   },
   {
@@ -90,7 +90,7 @@ export const PRODUCTS: Product[] = [
     price: 60,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: 'https://picsum.photos/seed/baby-dove-wash/300/300',
+    image: 'https://i.postimg.cc/CKmgKXBv/Baby_Dove_Wash.jpg',
     description: 'Moisturizing baby wash for daily hygiene.'
   },
   {
@@ -99,7 +99,7 @@ export const PRODUCTS: Product[] = [
     price: 25,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: 'https://picsum.photos/seed/baby-wet-wipes/300/300',
+    image: 'https://i.postimg.cc/MGdSGNMt/Baby_Wet_Wipes.jpg',
     description: 'Soft and gentle wet wipes for quick cleaning.'
   },
   {
@@ -108,7 +108,7 @@ export const PRODUCTS: Product[] = [
     price: 50,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: 'https://picsum.photos/seed/cussons-baby-hair-and-body-wash/300/300',
+    image: 'https://i.postimg.cc/9fJhfKRL/Cussons_Baby_Hair_Body_Wash.jpg',
     description: 'All-in-one wash for baby\'s hair and body.'
   },
   {
@@ -117,7 +117,7 @@ export const PRODUCTS: Product[] = [
     price: 40,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: 'https://picsum.photos/seed/dela-cruz-diaper-rash-ointment/300/300',
+    image: 'https://i.postimg.cc/DZ0K46Lc/Dela_Cruz_Diaper_Rash_Ointment.jpg',
     description: 'Effective ointment for diaper rash relief.'
   },
   {
@@ -126,7 +126,7 @@ export const PRODUCTS: Product[] = [
     price: 95,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: 'https://picsum.photos/seed/flora-baby-diapers/300/300',
+    image: 'https://i.postimg.cc/1tXZVBwJ/Flora_Baby_Diapers.jpg',
     description: 'Absorbent and comfortable diapers for your baby.'
   },
   {
@@ -135,7 +135,7 @@ export const PRODUCTS: Product[] = [
     price: 75,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: 'https://picsum.photos/seed/sebamed-diaper-rash-cream/300/300',
+    image: 'https://i.postimg.cc/63qN4cnc/Seba_Med_Diaper_Rash_Cream.jpg',
     description: 'Clinically tested cream for diaper rash protection.'
   }
 ];
