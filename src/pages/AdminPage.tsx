@@ -32,7 +32,6 @@ import {
 } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../firebase';
 import { Product } from '../types';
-import { PRODUCTS as INITIAL_PRODUCTS } from '../data/products';
 
 const CATEGORIES = [
   'Hygiene & Diapering',
@@ -70,7 +69,7 @@ export default function AdminPage() {
   });
 
   useEffect(() => {
-    const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
+    const q = query(collection(db, 'products'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const productsData = snapshot.docs.map(doc => ({
         id: doc.id,
@@ -97,26 +96,6 @@ export default function AdminPage() {
   const handleLogout = () => {
     setIsAuthenticated(false);
     setPassword('');
-  };
-
-  const handleSeedData = async () => {
-    if (window.confirm('This will add all initial products to your database. Continue?')) {
-      try {
-        const batch = writeBatch(db);
-        INITIAL_PRODUCTS.forEach(product => {
-          const newDocRef = doc(collection(db, 'products'));
-          const { id, ...productData } = product;
-          batch.set(newDocRef, {
-            ...productData,
-            createdAt: serverTimestamp()
-          });
-        });
-        await batch.commit();
-        alert('Database seeded successfully!');
-      } catch (err) {
-        handleFirestoreError(err, OperationType.WRITE, 'products');
-      }
-    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -263,13 +242,6 @@ export default function AdminPage() {
             <h1 className="text-4xl font-bold text-gray-900">Product CMS</h1>
           </div>
           <div className="flex items-center space-x-4 mt-6 md:mt-0">
-            <button 
-              onClick={handleSeedData}
-              className="bg-blue-500 text-white px-6 py-3 rounded-full font-bold flex items-center space-x-2 hover:bg-blue-600 transition-colors shadow-lg shadow-blue-200"
-            >
-              <Database size={20} />
-              <span>Seed Data</span>
-            </button>
             <button 
               onClick={() => setIsAdding(true)}
               className="bg-rose-500 text-white px-6 py-3 rounded-full font-bold flex items-center space-x-2 hover:bg-rose-600 transition-colors shadow-lg shadow-rose-200"

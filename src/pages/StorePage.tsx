@@ -20,7 +20,7 @@ export default function StorePage({ onAddToCart }: StorePageProps) {
   const activeAge = searchParams.get('age');
 
   useEffect(() => {
-    const q = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
+    const q = query(collection(db, 'products'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const productsData = snapshot.docs.map(doc => ({
         id: doc.id,
