@@ -8,7 +8,7 @@ export const PRODUCTS: Product[] = [
     price: 120,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/babyfirstaid.jpeg',
+    image: 'https://i.postimg.cc/MKFfn3RW/babyfirstaid.jpg',
     description: 'Essential first aid kit for your baby\'s health and safety.'
   },
   {
@@ -17,7 +17,7 @@ export const PRODUCTS: Product[] = [
     price: 45,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/cussonsbabylotion.jpeg',
+    image: 'https://i.postimg.cc/wjRyL5cz/cussonsbabylotion.jpg',
     description: 'Gentle moisturizing lotion for soft baby skin.'
   },
   {
@@ -26,7 +26,7 @@ export const PRODUCTS: Product[] = [
     price: 40,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/cussonsbabyoil.jpeg',
+    image: 'https://i.postimg.cc/yYb3Dp9d/cussonsbabyoil.jpg',
     description: 'Pure baby oil for gentle massage and skin care.'
   },
   {
@@ -35,7 +35,7 @@ export const PRODUCTS: Product[] = [
     price: 35,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/firsttoothbabyteethinggel.jpeg',
+    image: 'https://i.postimg.cc/CLQnRrDz/firsttoothbabyteethinggel.jpg',
     description: 'Soothing gel for baby\'s first teeth.'
   },
   {
@@ -44,7 +44,7 @@ export const PRODUCTS: Product[] = [
     price: 150,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/momcozyaspirator.jpeg',
+    image: 'https://i.postimg.cc/RZJ6K1Q9/momcozyaspirator.jpg',
     description: 'Safe and effective nasal aspirator for babies.'
   },
   {
@@ -53,7 +53,7 @@ export const PRODUCTS: Product[] = [
     price: 50,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/nextonbabybath.jpeg',
+    image: 'https://i.postimg.cc/SxY2CL7y/nextonbabybath.jpg',
     description: 'Mild baby bath for a gentle cleaning experience.'
   },
   {
@@ -62,7 +62,7 @@ export const PRODUCTS: Product[] = [
     price: 55,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/nextonbabylotion.jpeg',
+    image: 'https://i.postimg.cc/QdK91gkj/Nexton_Baby_Lotion.jpg',
     description: 'Nourishing baby lotion for daily use.'
   },
   {
@@ -71,7 +71,7 @@ export const PRODUCTS: Product[] = [
     price: 85,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/sheamoisturebabylotion.jpeg',
+    image: 'https://i.postimg.cc/GmT8GPJh/sheamoisturebabylotion.jpg',
     description: 'Organic shea butter lotion for sensitive baby skin.'
   },
   // Hygiene and Diapering
