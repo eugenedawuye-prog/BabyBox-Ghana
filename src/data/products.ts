@@ -8,7 +8,7 @@ export const PRODUCTS: Product[] = [
     price: 120,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/Health and Comfort/Baby FirstAid.jpeg',
+    image: '/health-and-comfort/baby-firstaid.jpeg',
     description: 'Essential first aid kit for your baby\'s health and safety.'
   },
   {
@@ -17,7 +17,7 @@ export const PRODUCTS: Product[] = [
     price: 45,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/Health and Comfort/Cussons Baby Lotion.jpeg',
+    image: '/health-and-comfort/cussons-baby-lotion.jpeg',
     description: 'Gentle moisturizing lotion for soft baby skin.'
   },
   {
@@ -26,7 +26,7 @@ export const PRODUCTS: Product[] = [
     price: 40,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/Health and Comfort/Cussons Baby Oil.jpeg',
+    image: '/health-and-comfort/cussons-baby-oil.jpeg',
     description: 'Pure baby oil for gentle massage and skin care.'
   },
   {
@@ -35,7 +35,7 @@ export const PRODUCTS: Product[] = [
     price: 35,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/Health and Comfort/First Tooth Baby Teething Gel.jpeg',
+    image: '/health-and-comfort/first-tooth-baby-teething-gel.jpeg',
     description: 'Soothing gel for baby\'s first teeth.'
   },
   {
@@ -44,7 +44,7 @@ export const PRODUCTS: Product[] = [
     price: 150,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/Health and Comfort/MomCozy Aspirator.jpeg',
+    image: '/health-and-comfort/momcozy-aspirator.jpeg',
     description: 'Safe and effective nasal aspirator for babies.'
   },
   {
@@ -53,7 +53,7 @@ export const PRODUCTS: Product[] = [
     price: 50,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/Health and Comfort/Nexton Baby Bath.jpeg',
+    image: '/health-and-comfort/nexton-baby-bath.jpeg',
     description: 'Mild baby bath for a gentle cleaning experience.'
   },
   {
@@ -62,7 +62,7 @@ export const PRODUCTS: Product[] = [
     price: 55,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/Health and Comfort/Nexton Baby Lotion.jpeg',
+    image: '/health-and-comfort/nexton-baby-lotion.jpeg',
     description: 'Nourishing baby lotion for daily use.'
   },
   {
@@ -71,7 +71,7 @@ export const PRODUCTS: Product[] = [
     price: 85,
     category: 'Health and Comfort',
     ageRange: '0-6 Months',
-    image: '/Health and Comfort/SheaMoisture Baby Lotion.jpeg',
+    image: '/health-and-comfort/sheamoisture-baby-lotion.jpeg',
     description: 'Organic shea butter lotion for sensitive baby skin.'
   },
   // Hygiene and Diapering
@@ -81,7 +81,7 @@ export const PRODUCTS: Product[] = [
     price: 65,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: '/Hygiene and Diapering/Baby Dove Night Time Wash.jpeg',
+    image: 'https://picsum.photos/seed/baby-dove-night-time-wash/300/300',
     description: 'Calming night time wash for a peaceful sleep.'
   },
   {
@@ -90,7 +90,7 @@ export const PRODUCTS: Product[] = [
     price: 60,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: '/Hygiene and Diapering/Baby Dove Wash.jpeg',
+    image: 'https://picsum.photos/seed/baby-dove-wash/300/300',
     description: 'Moisturizing baby wash for daily hygiene.'
   },
   {
@@ -99,7 +99,7 @@ export const PRODUCTS: Product[] = [
     price: 25,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: '/Hygiene and Diapering/Baby Wet Wipes.jpeg',
+    image: 'https://picsum.photos/seed/baby-wet-wipes/300/300',
     description: 'Soft and gentle wet wipes for quick cleaning.'
   },
   {
@@ -108,7 +108,7 @@ export const PRODUCTS: Product[] = [
     price: 50,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: '/Hygiene and Diapering/Cussons Baby Hair & Body Wash.jpeg',
+    image: 'https://picsum.photos/seed/cussons-baby-hair-and-body-wash/300/300',
     description: 'All-in-one wash for baby\'s hair and body.'
   },
   {
@@ -117,7 +117,7 @@ export const PRODUCTS: Product[] = [
     price: 40,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: '/Hygiene and Diapering/Dela Cruz Diaper Rash Ointment.jpeg',
+    image: 'https://picsum.photos/seed/dela-cruz-diaper-rash-ointment/300/300',
     description: 'Effective ointment for diaper rash relief.'
   },
   {
@@ -126,7 +126,7 @@ export const PRODUCTS: Product[] = [
     price: 95,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: '/Hygiene and Diapering/Flora Baby Diapers.jpeg',
+    image: 'https://picsum.photos/seed/flora-baby-diapers/300/300',
     description: 'Absorbent and comfortable diapers for your baby.'
   },
   {
@@ -135,7 +135,7 @@ export const PRODUCTS: Product[] = [
     price: 75,
     category: 'Hygiene and Diapering',
     ageRange: '0-6 Months',
-    image: '/Hygiene and Diapering/SebaMed Diaper Rash Cream.jpeg',
+    image: 'https://picsum.photos/seed/sebamed-diaper-rash-cream/300/300',
     description: 'Clinically tested cream for diaper rash protection.'
   }
 ];
