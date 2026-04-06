@@ -13,7 +13,9 @@ import {
   ChevronRight,
   Search,
   Filter,
-  Database
+  Database,
+  Upload,
+  Image as ImageIcon
 } from 'lucide-react';
 import { 
   collection, 
@@ -56,6 +58,7 @@ export default function AdminPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('All');
+  const [isUploading, setIsUploading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -121,6 +124,24 @@ export default function AdminPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 800000) { // ~800KB limit for base64 in Firestore
+      alert('Image is too large. Please select an image smaller than 800KB.');
+      return;
+    }
+
+    setIsUploading(true);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData(prev => ({ ...prev, image: reader.result as string }));
+      setIsUploading(false);
+    };
+    reader.readAsDataURL(file);
+  };
+
   const resetForm = () => {
     setFormData({
       name: '',
@@ -139,14 +160,19 @@ export default function AdminPage() {
     const productData = {
       ...formData,
       price: parseFloat(formData.price),
-      createdAt: serverTimestamp()
     };
 
     try {
       if (editingId) {
-        await updateDoc(doc(db, 'products', editingId), productData);
+        await updateDoc(doc(db, 'products', editingId), {
+          ...productData,
+          updatedAt: serverTimestamp()
+        });
       } else {
-        await addDoc(collection(db, 'products'), productData);
+        await addDoc(collection(db, 'products'), {
+          ...productData,
+          createdAt: serverTimestamp()
+        });
       }
       resetForm();
     } catch (err) {
@@ -274,7 +300,6 @@ export default function AdminPage() {
               </div>
             </div>
           </div>
-          {/* Add more stats if needed */}
         </div>
 
         {/* Search & Filter */}
@@ -380,7 +405,7 @@ export default function AdminPage() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden"
+              className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
             >
               <div className="p-8">
                 <div className="flex items-center justify-between mb-8">
@@ -438,18 +463,60 @@ export default function AdminPage() {
                         {AGE_RANGES.map(age => <option key={age} value={age}>{age}</option>)}
                       </select>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Image URL/Path</label>
-                      <input 
-                        required
-                        type="text" 
-                        name="image"
-                        value={formData.image}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 outline-none transition-all"
-                        placeholder="/Hygiene and Diapering/Product.jpeg"
-                      />
+                    
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Product Image</label>
+                      <div className="flex flex-col md:flex-row gap-4">
+                        <div className="flex-grow">
+                          <div className="relative group">
+                            <input 
+                              type="file" 
+                              accept="image/*"
+                              onChange={handleImageUpload}
+                              className="hidden"
+                              id="image-upload"
+                            />
+                            <label 
+                              htmlFor="image-upload"
+                              className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-200 rounded-2xl cursor-pointer hover:border-rose-500 hover:bg-rose-50 transition-all"
+                            >
+                              {isUploading ? (
+                                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-rose-500" />
+                              ) : formData.image ? (
+                                <div className="relative w-full h-full p-2">
+                                  <img 
+                                    src={formData.image} 
+                                    alt="Preview" 
+                                    className="w-full h-full object-contain rounded-lg"
+                                  />
+                                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-lg transition-opacity">
+                                    <Upload className="text-white" size={24} />
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="flex flex-col items-center text-gray-400">
+                                  <Upload size={24} className="mb-2" />
+                                  <span className="text-xs font-medium">Click to upload image</span>
+                                  <span className="text-[10px]">Max 800KB</span>
+                                </div>
+                              )}
+                            </label>
+                          </div>
+                        </div>
+                        <div className="md:w-1/2">
+                          <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Or Image URL</label>
+                          <input 
+                            type="text" 
+                            name="image"
+                            value={formData.image}
+                            onChange={handleInputChange}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-rose-500 outline-none transition-all text-sm"
+                            placeholder="https://example.com/image.jpg"
+                          />
+                        </div>
+                      </div>
                     </div>
+
                     <div className="col-span-2">
                       <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                       <textarea 
@@ -466,7 +533,8 @@ export default function AdminPage() {
                   <div className="flex space-x-4 pt-4">
                     <button 
                       type="submit"
-                      className="flex-grow bg-rose-500 text-white py-4 rounded-xl font-bold hover:bg-rose-600 transition-colors shadow-lg shadow-rose-200 flex items-center justify-center space-x-2"
+                      disabled={isUploading}
+                      className="flex-grow bg-rose-500 text-white py-4 rounded-xl font-bold hover:bg-rose-600 transition-colors shadow-lg shadow-rose-200 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <Save size={20} />
                       <span>{editingId ? 'Update Product' : 'Save Product'}</span>
