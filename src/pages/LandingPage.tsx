@@ -114,7 +114,7 @@ const Hero = () => (
               {[1, 2, 3, 4].map((i) => (
                 <img
                   key={i}
-                  src={`https://i.postimg.cc/h46W59R7/New-Baby-Starter-Set-Girls-Gift-Box.jpg`}
+                  src={`https://picsum.photos/seed/baby${i}/100/100`}
                   alt="Happy Baby"
                   className="w-10 h-10 rounded-full border-2 border-white object-cover"
                   referrerPolicy="no-referrer"
@@ -270,17 +270,17 @@ const ValueProps = () => {
     {
       title: "Unique Curation",
       description: "Each box is unique and consciously curated for a special little one.",
-      image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&q=80&w=800&h=600"
+      image: "https://i.postimg.cc/h46W59R7/New-Baby-Starter-Set-Girls-Gift-Box.jpg?auto=format&fit=crop&q=80&w=800&h=600"
     },
     {
       title: "Sustainable Brands",
       description: "We introduce you to premium brands that care about the planet and your baby.",
-      image: "https://images.unsplash.com/photo-1544126592-807daa2b567b?auto=format&fit=crop&q=80&w=800&h=600"
+      image: "https://i.postimg.cc/6QvYTG1P/Exclusive.jpg?auto=format&fit=crop&q=80&w=800&h=600"
     },
     {
       title: "Save Time & Money",
       description: "Premium products at a fraction of the retail price, delivered to your door.",
-      image: "https://images.unsplash.com/photo-1515488764276-beab7607c1e6?auto=format&fit=crop&q=80&w=800&h=600"
+      image: "https://i.postimg.cc/kgVyhb92/Uptown-Baby-Session-Brooke-Boyd-Photo-Film-00598.webp?auto=format&fit=crop&q=80&w=800&h=600"
     }
   ];
 
