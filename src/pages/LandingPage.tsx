@@ -66,18 +66,18 @@ const FeaturedProducts = ({ onAddToCart }: { onAddToCart: (product: Product) => 
 };
 
 const AGES = [
-  { label: '0-6 Months', href: '/store?age=0-6 Months' },
-  { label: '7-12 Months', href: '/store?age=7-12 Months' },
-  { label: '1-2 Years', href: '/store?age=1-2 Years' },
-  { label: '2-3 Years', href: '/store?age=2-3 Years' },
-  { label: '3+ Years', href: '/store?age=3+ Years' },
+  { label: '0-6 Months', href: `/store?age=${encodeURIComponent('0-6 Months')}` },
+  { label: '7-12 Months', href: `/store?age=${encodeURIComponent('7-12 Months')}` },
+  { label: '1-2 Years', href: `/store?age=${encodeURIComponent('1-2 Years')}` },
+  { label: '2-3 Years', href: `/store?age=${encodeURIComponent('2-3 Years')}` },
+  { label: '3+ Years', href: `/store?age=${encodeURIComponent('3+ Years')}` },
 ];
 
 const CATEGORIES = [
-  { label: 'Hygiene & Diapering', href: '/store?category=Hygiene & Diapering' },
-  { label: 'Feeding & Nutrition', href: '/store?category=Feeding & Nutrition' },
-  { label: 'Health & Comfort', href: '/store?category=Health & Comfort' },
-  { label: 'Development & Play', href: '/store?category=Development & Play' },
+  { label: 'Hygiene & Diapering', href: `/store?category=${encodeURIComponent('Hygiene & Diapering')}` },
+  { label: 'Feeding & Nutrition', href: `/store?category=${encodeURIComponent('Feeding & Nutrition')}` },
+  { label: 'Health & Comfort', href: `/store?category=${encodeURIComponent('Health & Comfort')}` },
+  { label: 'Development & Play', href: `/store?category=${encodeURIComponent('Development & Play')}` },
 ];
 
 const Hero = () => (
