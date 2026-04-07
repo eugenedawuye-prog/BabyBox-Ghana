@@ -114,7 +114,7 @@ const Hero = () => (
               {[1, 2, 3, 4].map((i) => (
                 <img
                   key={i}
-                  src={`https://picsum.photos/seed/baby${i}/100/100`}
+                  src={`https://i.postimg.cc/h46W59R7/New-Baby-Starter-Set-Girls-Gift-Box.jpg`}
                   alt="Happy Baby"
                   className="w-10 h-10 rounded-full border-2 border-white object-cover"
                   referrerPolicy="no-referrer"
