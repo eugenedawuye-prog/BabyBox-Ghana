@@ -9,7 +9,7 @@ import {
   ShoppingBag,
   ChevronRight
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Product } from '../types';
 import { PRODUCTS } from '../data/products';
 import { resolveImageUrl } from '../utils';
@@ -320,7 +320,8 @@ const ValueProps = () => {
   );
 };
 
-const Pricing = () => {
+const Pricing = ({ onAddToCart }: { onAddToCart: (product: Product) => void }) => {
+  const navigate = useNavigate();
   const plans = [
     {
       name: "Monthly",
@@ -344,6 +345,20 @@ const Pricing = () => {
       popular: false
     }
   ];
+
+  const handleChoosePlan = (plan: typeof plans[0]) => {
+    const planProduct: Product = {
+      id: `plan-${plan.name.toLowerCase().replace(/\s+/g, '-')}`,
+      name: `BabyBox Subscription - ${plan.name}`,
+      price: parseInt(plan.price.replace(/[^\d]/g, '')),
+      category: 'Subscription',
+      ageRange: 'All Ages',
+      image: 'https://i.postimg.cc/h46W59R7/New-Baby-Starter-Set-Girls-Gift-Box.jpg',
+      description: plan.features.join(', ')
+    };
+    onAddToCart(planProduct);
+    navigate('/checkout');
+  };
 
   return (
     <section className="py-24 bg-white">
@@ -378,7 +393,9 @@ const Pricing = () => {
                   </li>
                 ))}
               </ul>
-              <button className={`w-full py-4 rounded-full font-bold transition-all ${
+              <button 
+                onClick={() => handleChoosePlan(plan)}
+                className={`w-full py-4 rounded-full font-bold transition-all ${
                 plan.popular ? 'bg-rose-500 text-white hover:bg-rose-600' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
               }`}>
                 Choose Plan
@@ -450,7 +467,7 @@ export default function LandingPage({ onAddToCart }: LandingPageProps) {
       <FeaturedIn />
       <HowItWorks />
       <ValueProps />
-      <Pricing />
+      <Pricing onAddToCart={onAddToCart} />
       <Reviews />
     </>
   );
